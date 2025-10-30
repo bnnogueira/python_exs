@@ -28,10 +28,12 @@ Aqui vão 10 exercícios práticos para você treinar análise de dados com essa
     10 - Mostre o produto mais vendido em cada loja.
 '''
 
+# Importando bibliotecas
 import pandas as pd
 import numpy as np
 from rich.jupyter import display
 
+# Importando tabela e criando um DataFrame
 vendas_lojas = pd.read_excel('vendas.xlsx')
 table = pd.DataFrame(vendas_lojas)
 
@@ -54,7 +56,6 @@ print(f"Desvio Padrão: {std_vendas:.2f}\n")
 
 # Calculando o produto mais vendido
 more_sales = table.groupby('Produto')['Quantidade'].sum()
-
 top_one = more_sales.idxmax()
 
 print(f"Produto mais vendido: {top_one}")
