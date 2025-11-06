@@ -15,9 +15,9 @@ Aqui vão 10 exercícios práticos para você treinar análise de dados com essa
 
 📆 Análise temporal
 
-    6 - Agrupe as vendas por mês e calcule o total de “Valor Final” por mês.
+    6 - Agrupe as vendas por mês e calcule o total de “Valor Final” por mês. - ✅
 
-    7 - Identifique o mês com o maior e o menor faturamento.
+    7 - Identifique o mês com o maior e o menor faturamento. - ✅
 
     8 - Crie um gráfico de linha mostrando a evolução do faturamento mensal.
 
@@ -32,6 +32,7 @@ Aqui vão 10 exercícios práticos para você treinar análise de dados com essa
 import pandas as pd
 import numpy as np
 from rich.jupyter import display
+import matplotlib.pyplot as plt
 
 # Importando tabela e criando um DataFrame
 vendas_lojas = pd.read_excel('vendas.xlsx')
@@ -50,8 +51,8 @@ mean_vendas = table['Valor Final'].mean()
 median_vendas = table['Valor Final'].median()
 std_vendas = table['Valor Final'].std(ddof=0)
 
-print(f"Média: {mean_vendas:.2f}\n")
-print(f"Mediana: {median_vendas}\n")
+print(f"Média: {mean_vendas:.2f}")
+print(f"Mediana: {median_vendas}")
 print(f"Desvio Padrão: {std_vendas:.2f}\n")
 
 # Calculando o produto mais vendido
@@ -69,3 +70,12 @@ print(f"Cinco produtos mais vendidos: {top_five}\n")
 table['ValorMes'] = table['Data'].dt.to_period('M')
 vendas_mensais = table.groupby('ValorMes')['Valor Final'].sum()
 print(f"Vendas mensais: {vendas_mensais}")
+
+# Identificando mês com maior e menor faturamento
+best_month = vendas_mensais.idxmax()
+worst_month = vendas_mensais.idxmin()
+print(f"Melhor mês: {best_month}")
+print(f"Pior mês: {worst_month}\n")
+
+# Criando gráfico de linha mostrando a evolução de faturamento mensal
+plt.plot(vendas_mensais['ValorMes'], label='Valor Mensais')
